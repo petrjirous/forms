@@ -60,8 +60,17 @@ Nette.getValue = function(elem) {
 			}
 		}
 		return values;
-
-	} else if (elem.type in {checkbox: 1, radio: 1}) {
+	} else if (elem.type === 'checkbox') {
+		var elements = elem.form.elements[elem.name]; vals = [];
+		
+		for(i = 0; i < elements.length; i++) {
+			if(elements[i].checked) {
+				vals.push(elements[i].value);
+			}
+		}
+		
+		return vals;
+	} else if (elem.type === 'radio') {
 		return elem.checked;
 
 	} else if (elem.type === 'file') {
